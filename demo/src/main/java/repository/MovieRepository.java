@@ -8,10 +8,15 @@ import classes.Movie;
 public class MovieRepository {
     private static MovieRepository instance;
     private List<Movie> filmes = new ArrayList<>();
+    
     private static int id = 1;
     private static int idFeedback = 1;
 
     private MovieRepository() {
+        filmes.add(new Movie(id++, "Matrix", "Filme de ação", 1999, "Wachowski"));
+        filmes.add(new Movie(id++, "Matrix Reloaded", "Filme de ação", 2003, "Wachowski"));
+        filmes.add(new Movie(id++, "Matrix Revolutions", "Filme de ação", 2003, "Wachowski"));
+        filmes.add(new Movie(id++, "Matrix 4", "Filme de ação", 2021, "Wachowski"));
     }
 
     public static MovieRepository getInstance() {
@@ -35,10 +40,6 @@ public class MovieRepository {
         }
     }
     public List<Movie> getFilmes() {
-        filmes.add(new Movie(1, "Matrix", "Filme de ação", 1999, "Wachowski"));
-        filmes.add(new Movie(2, "Matrix Reloaded", "Filme de ação", 2003, "Wachowski"));
-        filmes.add(new Movie(3, "Matrix Revolutions", "Filme de ação", 2003, "Wachowski"));
-        filmes.add(new Movie(4, "Matrix 4", "Filme de ação", 2021, "Wachowski"));
         return filmes;
     }
 
