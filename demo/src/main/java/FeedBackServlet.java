@@ -55,9 +55,7 @@ public class FeedBackServlet extends HttpServlet {
         for (Movie filme : filmes) {
             if (filme.getId() == id) {
                 filmeService.addFeedback(id, feedback);
-                String json = mapper.writeValueAsString(filme.getFeedbacks());
-                resp.setContentType("application/json");
-                resp.getWriter().write(json);
+                resp.setStatus(201);
                 return;
             }
         }
