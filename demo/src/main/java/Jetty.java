@@ -2,6 +2,9 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
+import routes.FeedBackServlet;
+import routes.MovieServlet;
+
 public class Jetty {
     public static void main(String[] args) {
         Server server = new Server(8080);
