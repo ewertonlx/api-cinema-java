@@ -34,10 +34,9 @@ public class FeedBackServlet extends HttpServlet {
         for (Movie movie : movies) {
             if (movie.getId() == id) {
                 ObjectMapper mapper = new ObjectMapper();
-                String json;
                 Map<String, Object> movieData = new HashMap<>();
                 movieData.put("movie", movie);
-                json = mapper.writeValueAsString(movieData);
+                String json = mapper.writeValueAsString(movieData);
                 resp.setContentType("application/json");
                 resp.getWriter().write(json);
                 return;
