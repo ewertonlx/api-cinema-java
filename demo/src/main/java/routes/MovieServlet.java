@@ -26,9 +26,9 @@ public class MovieServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Movie> filmes = movieService.getMovies();
+        List<Movie> movies = movieService.getMovies();
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(filmes);
+        String json = mapper.writeValueAsString(movies);
         resp.setContentType("application/json");
         resp.getWriter().write(json);
     }
@@ -36,8 +36,8 @@ public class MovieServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        Movie filme = mapper.readValue(req.getReader(), Movie.class);
-        movieService.addMovie(filme);
+        Movie movie = mapper.readValue(req.getReader(), Movie.class);
+        movieService.addMovie(movie);
         resp.setStatus(201);
     }
 }
