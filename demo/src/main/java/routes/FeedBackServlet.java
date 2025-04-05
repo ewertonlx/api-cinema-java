@@ -19,24 +19,24 @@ import services.MovieService;
 @WebServlet("/feedback")
 public class FeedBackServlet extends HttpServlet {
     private MovieRepository repository;
-    private MovieService filmeService;
+    private MovieService movieService;
 
     @Override
     public void init() throws ServletException {
         this.repository = MovieRepository.getInstance();
-        this.filmeService = new MovieService(repository);
+        this.movieService = new MovieService(repository);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        List<Movie> filmes = filmeService.getFilmes();
-        for (Movie filme : filmes) {
-            if (filme.getId() == id) {
+        List<Movie> movies = movieService.getMovies();
+        for (Movie movie : movies) {
+            if (movie.getId() == id) {
                 ObjectMapper mapper = new ObjectMapper();
                 String json;
                 Map<String, Object> movieData = new HashMap<>();
-                movieData.put("movie", filme);
+                movieData.put("movie", movie);
                 json = mapper.writeValueAsString(movieData);
                 resp.setContentType("application/json");
                 resp.getWriter().write(json);
@@ -52,10 +52,10 @@ public class FeedBackServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         int id = Integer.parseInt(req.getParameter("id"));
         Feedback feedback = mapper.readValue(req.getReader(), Feedback.class);
-        List<Movie> filmes = filmeService.getFilmes();
-        for (Movie filme : filmes) {
-            if (filme.getId() == id) {
-                filmeService.addFeedback(id, feedback);
+        List<Movie> movies = movieService.getMovies();
+        for (Movie movie : movies) {
+            if (movie.getId() == id) {
+                movieService.addFeedback(id, feedback);
                 resp.setStatus(201);
                 return;
             }

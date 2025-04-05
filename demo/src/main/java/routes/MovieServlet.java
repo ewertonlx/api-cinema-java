@@ -16,17 +16,17 @@ import services.MovieService;
 @WebServlet("/filmes")
 public class MovieServlet extends HttpServlet {
     private MovieRepository repository;
-    private MovieService filmeService;
+    private MovieService movieService;
 
     @Override
     public void init() throws ServletException {
         this.repository = MovieRepository.getInstance();
-        this.filmeService = new MovieService(repository);
+        this.movieService = new MovieService(repository);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Movie> filmes = filmeService.getFilmes();
+        List<Movie> filmes = movieService.getMovies();
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(filmes);
         resp.setContentType("application/json");
@@ -37,7 +37,7 @@ public class MovieServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         Movie filme = mapper.readValue(req.getReader(), Movie.class);
-        filmeService.addFilme(filme);
+        movieService.addMovie(filme);
         resp.setStatus(201);
     }
 }

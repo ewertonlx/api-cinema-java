@@ -7,16 +7,16 @@ import classes.Movie;
 
 public class MovieRepository {
     private static MovieRepository instance;
-    private List<Movie> filmes = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
     
     private static int id = 1;
     private static int idFeedback = 1;
 
     private MovieRepository() {
-        filmes.add(new Movie(id++, "Matrix", "Filme de ação", 1999, "Wachowski"));
-        filmes.add(new Movie(id++, "Matrix Reloaded", "Filme de ação", 2003, "Wachowski"));
-        filmes.add(new Movie(id++, "Matrix Revolutions", "Filme de ação", 2003, "Wachowski"));
-        filmes.add(new Movie(id++, "Matrix 4", "Filme de ação", 2021, "Wachowski"));
+        movies.add(new Movie(id++, "Matrix", "Filme de ação", 1999, "Wachowski"));
+        movies.add(new Movie(id++, "Matrix Reloaded", "Filme de ação", 2003, "Wachowski"));
+        movies.add(new Movie(id++, "Matrix Revolutions", "Filme de ação", 2003, "Wachowski"));
+        movies.add(new Movie(id++, "Matrix 4", "Filme de ação", 2021, "Wachowski"));
     }
 
     public static MovieRepository getInstance() {
@@ -25,37 +25,37 @@ public class MovieRepository {
         }
         return instance;
     }
-    public void addFilme(Movie filme) {
-        filme = new Movie(id++, filme.getName(), filme.getDescription(), filme.getYear(), filme.getDirector());
-        filmes.add(filme);
+    public void addMovie(Movie movie) {
+        movie = new Movie(id++, movie.getName(), movie.getDescription(), movie.getYear(), movie.getDirector());
+        movies.add(movie);
     }
 
-    public void addFeedback(int idFilme, Feedback feedback) {
-        for (Movie filme : filmes) {
-            if (filme.getId() == idFilme) {
+    public void addFeedback(int idMovie, Feedback feedback) {
+        for (Movie movie : movies) {
+            if (movie.getId() == idMovie) {
                 feedback = new Feedback(idFeedback++, feedback.getUsername(), feedback.getComment(), feedback.getClassification());
-                filme.addFeedback(feedback);
+                movie.addFeedback(feedback);
                 return;
             }
         }
     }
-    public List<Movie> getFilmes() {
-        return filmes;
+    public List<Movie> getMovies() {
+        return movies;
     }
 
-    public Movie getFilme(int id) {
-        for (Movie filme : filmes) {
-            if (filme.getId() == id) {
-                return filme;
+    public Movie getMovie(int id) {
+        for (Movie movie : movies) {
+            if (movie.getId() == id) {
+                return movie;
             }
         }
         return null;
     }
 
-    public void removeFilme(String name) {
-        for (Movie filme : filmes) {
-            if (filme.getName().equals(name)) {
-                filmes.remove(filme);
+    public void removeMovie(String name) {
+        for (Movie movie : movies) {
+            if (movie.getName().equals(name)) {
+                movies.remove(movie);
                 return;
             }
         }
